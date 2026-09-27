@@ -234,17 +234,256 @@
 // export default App;
 
 
+// import { Routes, Route } from "react-router-dom";
+// import Navbar from "./Navbar";
+// import Home from "./Home";
+// import Products from "./Products";
+// import Productdetails from "./Productdetails";
+// import Cart from "./Cart";
+// import Checkout from "./Checkout";
+// import About from "./About";
+// import Contact from "./Contact";
+// import Login from "./Login";
+// import Signup from "./Signup";
+
+// function App() {
+//   return (
+//     <>
+//       <Navbar />
+
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/products" element={<Products />} />
+//         <Route path="/productdetails/:id" element={<Productdetails />} />
+//         <Route path="/cart" element={<Cart />} />
+//         <Route path="/checkout" element={<Checkout />} />
+//         <Route path="/about" element={<About />} />
+//         <Route path="/contact" element={<Contact />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//       </Routes>
+//     </>
+//   );
+// }
+
+// export default App;
+
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import Home from "./Home";
+// import Products from "./Products";
+// import About from "./About";
+// import Cart from "./Cart";
+// import Contact from "./Contact";
+// import Login from "./Login";
+// import Signup from "./Signup";
+// import Navbar from "./Navbar";
+
+// function App() {
+//   return (
+//     <BrowserRouter>
+//       <Navbar />
+
+//       <Routes>
+//         {/* HOME PAGE */}
+//         <Route path="/" element={<Home />} />
+//         <Route path="/home" element={<Home />} />
+
+//         {/* OTHER PAGES */}
+//         <Route path="/products" element={<Products />} />
+//         <Route path="/about" element={<About />} />
+//         <Route path="/cart" element={<Cart />} />
+//         <Route path="/contact" element={<Contact />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
+
+// export default App;
+
+// import { Routes, Route, Navigate } from "react-router-dom";
+// import Navbar from "./Navbar";
+
+// import Home from "./Home";
+// import Products from "./Products";
+// import ProductDetails from "./Productdetails";
+// import About from "./About";
+// import Cart from "./Cart";
+// import Contact from "./Contact";
+// import Login from "./Login";
+// import Signup from "./Signup";
+
+// function App() {
+//   return (
+//     <>
+//       <Navbar />
+
+//       <Routes>
+//         {/* HOME */}
+//         <Route path="/" element={<Home />} />
+//         <Route path="/home" element={<Navigate to="/" />} />
+
+//         {/* OTHER PAGES */}
+//         <Route path="/products" element={<Products />} />
+//         <Route path="/productdetails/:id" element={<ProductDetails />} />
+//         <Route path="/about" element={<About />} />
+//         <Route path="/cart" element={<Cart />} />
+//         <Route path="/contact" element={<Contact />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+
+//         {/* SAFETY */}
+//         <Route path="*" element={<Navigate to="/" />} />
+//       </Routes>
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+// import { Routes, Route, Navigate } from "react-router-dom";
+// import Navbar from "./Navbar";
+
+// import Home from "./Home";
+// import Products from "./Products";
+// import Productdetails from "./Productdetails";
+// import About from "./About";
+// import Cart from "./Cart";
+// import Contact from "./Contact";
+// import Login from "./Login";
+// import Signup from "./Signup";
+
+// function App() {
+//   return (
+//     <>
+//       <Navbar />
+
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/home" element={<Navigate to="/" />} />
+
+//         <Route path="/products" element={<Products />} />
+//         <Route path="/productdetails/:id" element={<Productdetails />} />
+
+//         <Route path="/about" element={<About />} />
+//         <Route path="/cart" element={<Cart />} />
+//         <Route path="/contact" element={<Contact />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//       </Routes>
+//     </>
+//   );
+// }
+
+// export default App;
+
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import Products from "./pages/Products";
+// import ProductDetails from "./pages/ProductDetails";
+// import Cart from "./pages/Cart";
+// import Navbar from "./components/Navbar";
+
+// function App() {
+//   return (
+//     <BrowserRouter>
+//       <Navbar />
+//       <Routes>
+//         <Route path="/" element={<Products />} />
+//         <Route path="/product/:id" element={<ProductDetails />} />
+//         <Route path="/cart" element={<Cart />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
+
+// export default App;
+
+
+// import { Routes, Route, Navigate } from "react-router-dom";
+// import Navbar from "./Navbar";
+
+// import Home from "./Home";
+// import Products from "./Products";
+// import Productdetails from "./Productdetails";
+// import About from "./About";
+// import Cart from "./Cart";
+// import Contact from "./Contact";
+// import Login from "./Login";
+// import Signup from "./Signup";
+
+// function App() {
+//   return (
+//     <>
+//       <Navbar />
+
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/home" element={<Navigate to="/" />} />
+
+//         <Route path="/products" element={<Products />} />
+//         <Route path="/productdetails/:id" element={<Productdetails />} />
+
+//         <Route path="/about" element={<About />} />
+//         <Route path="/cart" element={<Cart />} />
+//         <Route path="/contact" element={<Contact />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//       </Routes>
+//     </>
+//   );
+// }
+
+// export default App;
+
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Navbar from "./Navbar";
+
+// import Home from "./Home";
+// import Products from "./Products";
+// import Productdetails from "./Productdetails";
+// import Cart from "./Cart";
+// import Checkout from "./Checkout";
+// import Login from "./Login";
+// import Signup from "./Signup";
+// import About from "./About";
+// import Contact from "./Contact";
+
+// function App() {
+//   return (
+//     <Router>
+//       <Navbar />
+
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/products" element={<Products />} />
+//         <Route path="/productdetails/:id" element={<Productdetails />} />
+//         <Route path="/cart" element={<Cart />} />
+//         <Route path="/checkout" element={<Checkout />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//         <Route path="/about" element={<About />} />
+//         <Route path="/contact" element={<Contact />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
+
 import Home from "./Home";
 import Products from "./Products";
 import Productdetails from "./Productdetails";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
-import About from "./About";
-import Contact from "./Contact";
 import Login from "./Login";
 import Signup from "./Signup";
+import About from "./About";
+import Contact from "./Contact";
 
 function App() {
   return (
@@ -257,15 +496,13 @@ function App() {
         <Route path="/productdetails/:id" element={<Productdetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
   );
 }
 
 export default App;
-
-

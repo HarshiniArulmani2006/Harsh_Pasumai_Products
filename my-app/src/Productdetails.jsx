@@ -184,29 +184,130 @@
 // }
 
 // export default ProductDetails;
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { productAPI } from "./services/api";
+// import { useParams } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import { productAPI } from "./services/api";
 
-function ProductDetails() {
+// function ProductDetails() {
+//   const { id } = useParams();
+//   const [product, setProduct] = useState(null);
+
+//   useEffect(() => {
+//     productAPI.getProductById(id).then(setProduct);
+//   }, [id]);
+
+//   if (!product) return <h2>Loading...</h2>;
+
+//   return (
+//     <div style={{ padding: "40px" }}>
+//       <img src={product.image} width="300" />
+//       <h2>{product.name}</h2>
+//       <h3>₹ {product.price}</h3>
+//       <p>{product.description}</p>
+//     </div>
+//   );
+// }
+
+// export default ProductDetails;
+
+// import { useParams } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import API from "../services/api";
+
+// const ProductDetails = () => {
+//   const { id } = useParams();
+//   const [product, setProduct] = useState(null);
+
+//   useEffect(() => {
+//     API.get(`/products/${id}`)
+//       .then(res => setProduct(res.data))
+//       .catch(err => console.log(err));
+//   }, [id]);
+
+//   if (!product) return <h2>Loading...</h2>;
+
+//   return (
+//     <div style={{ padding: "40px" }}>
+//       <img src={product.image} alt={product.name} width="300" />
+//       <h2>{product.name}</h2>
+//       <h3>₹ {product.price}</h3>
+//       <p>{product.description}</p>
+//     </div>
+//   );
+// };
+
+// export default ProductDetails;
+
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { addToCart as saveCartItem, getProductById } from "./services/api";
+
+function Productdetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    productAPI.getProductById(id).then(setProduct);
+    getProductById(id)
+      .then(res => setProduct(res.data))
+      .catch(err => setError(err.response?.data?.message || "Product not found"));
   }, [id]);
 
+  if (error) return <h2>{error}</h2>;
   if (!product) return <h2>Loading...</h2>;
 
+  const addToCart = async () => {
+    if (!localStorage.getItem("token")) {
+      localStorage.setItem("pendingBuyNow", JSON.stringify(product));
+      navigate("/login");
+      return;
+    }
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const exists = cart.find(item => item._id === product._id);
+
+    if (exists) {
+      cart = cart.map(item =>
+        item._id === product._id
+          ? { ...item, qty: item.qty + 1 }
+          : item
+      );
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    await saveCartItem(product._id);
+    alert("Added to cart");
+  };
+
+  const buyNow = () => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+      return;
+    }
+    localStorage.setItem("checkoutItems", JSON.stringify([{ ...product, qty: 1 }]));
+    navigate("/checkout");
+  };
+
   return (
-    <div style={{ padding: "40px" }}>
-      <img src={product.image} width="300" />
-      <h2>{product.name}</h2>
-      <h3>₹ {product.price}</h3>
-      <p>{product.description}</p>
+    <div className="details-page">
+      <div className="details-image-wrap">
+        <img className="details-image" src={product.image_url || product.image} alt={product.name} />
+      </div>
+      <div className="details-content">
+        <p className="details-label">PASUMAI COLLECTION</p>
+        <h2>{product.name}</h2>
+        <p className="details-price">₹ {product.price}</p>
+        <p className="details-description">{product.description}</p>
+
+        <div className="details-actions">
+          <button className="details-buy" onClick={buyNow}>Buy Now</button>
+          <button className="details-cart" onClick={addToCart}>Add to Cart</button>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default ProductDetails;
-
+export default Productdetails;

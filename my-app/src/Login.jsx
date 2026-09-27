@@ -1,6 +1,32 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "./services/api";
 
 function Login() {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    try {
+      const { data } = await login(form);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      const pendingBuyNow = localStorage.getItem("pendingBuyNow");
+      if (pendingBuyNow) {
+        localStorage.setItem("checkoutItems", JSON.stringify([{ ...JSON.parse(pendingBuyNow), qty: 1 }]));
+        localStorage.removeItem("pendingBuyNow");
+        navigate("/checkout");
+      } else {
+        navigate("/products");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
+  };
+
   return (
     <div style={{
       height: "100vh",
@@ -18,15 +44,20 @@ function Login() {
       }}>
         <h2 style={{ textAlign: "center", color: "green" }}>Login</h2>
 
-        <input type="text" placeholder="Email"
+        <form onSubmit={handleSubmit}>
+        <input type="email" placeholder="Email" value={form.email}
+          onChange={(event) => setForm({ ...form, email: event.target.value })}
           style={inputStyle}
         /><br />
 
-        <input type="password" placeholder="Password"
+        <input type="password" placeholder="Password" value={form.password}
+          onChange={(event) => setForm({ ...form, password: event.target.value })}
           style={inputStyle}
         /><br />
 
-        <button style={buttonStyle}>Login</button>
+        <button type="submit" style={buttonStyle}>Login</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        </form>
 
         <p style={{ textAlign: "center", marginTop: "10px" }}>
           Don’t have an account? <Link to="/signup">Signup</Link>

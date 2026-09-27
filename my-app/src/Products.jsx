@@ -491,28 +491,185 @@
 
 // export default Products;
 
+// import { useEffect, useState } from "react";
+// import { productAPI } from "./services/api";
+// import { Link } from "react-router-dom";
+
+// function Products() {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     productAPI.getAllProducts().then((data) => {
+//       console.log("API DATA:", data); // 👈 must print array
+//       setProducts(data);
+//     });
+//   }, []);
+
+//   return (
+//     <div className="products-container">
+//       {products.map((p) => (
+//         <div key={p._id} className="product-card">
+//           <img src={p.image} alt={p.name} />
+//           <h3>{p.name}</h3>
+//           <p>₹ {p.price}</p>
+//           <Link to={`/productdetails/${p._id}`}>View</Link>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default Products;
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import "./Products.css";
+
+// const Products = () => {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     axios.get("http://localhost:5000/api/products")
+//       .then(res => setProducts(res.data))
+//       .catch(err => console.log(err));
+//   }, []);
+
+//   return (
+//     <div className="products-page">
+//       <h2 className="featured-title">Featured Products</h2>
+
+//       <div className="featured-products">
+//         {products.map((p) => (
+//           <div className="product-card" key={p._id}>
+
+//             {/* 🔥 IMAGE FIX */}
+//             <div className="product-image">
+//               <img src={p.image} alt={p.name} />
+//             </div>
+
+//             <h3>{p.name}</h3>
+//             <p className="price">₹ {p.price}</p>
+
+//             <button className="btn-buy">Buy Now</button>
+//             <button className="btn-cart">Add to Cart</button>
+
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Products;
+// import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
+// import { getProducts } from "./services/api";
+// import "./Products.css";
+
+// function Products() {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     getProducts()
+//       .then(res => setProducts(res.data))
+//       .catch(err => console.error(err));
+//   }, []);
+
+//   return (
+//     <div className="featured-products">
+//       {products.map(product => (
+//         <div className="product-card" key={product._id}>
+//           <div className="product-image">
+//             <img src={product.image} alt={product.name} />
+//           </div>
+
+//           <h3>{product.name}</h3>
+//           <p className="price">₹ {product.price}</p>
+
+//           <Link to={`/productdetails/${product._id}`} className="view-link">
+//             View Details
+//           </Link>
+
+//           <button className="btn-buy">Buy Now</button>
+//           <button className="btn-cart">Add to Cart</button>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default Products;
+
 import { useEffect, useState } from "react";
-import { productAPI } from "./services/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { addToCart as saveCartItem, getProducts } from "./services/api";
+import "./Products.css";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    productAPI.getAllProducts().then((data) => {
-      console.log("API DATA:", data); // 👈 must print array
-      setProducts(data);
-    });
+    getProducts()
+      .then(res => setProducts(res.data))
+      .catch(err => console.error(err));
   }, []);
 
+  const addToCart = async (product) => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+      return;
+    }
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const exists = cart.find(item => item._id === product._id);
+
+    if (exists) {
+      cart = cart.map(item =>
+        item._id === product._id
+          ? { ...item, qty: item.qty + 1 }
+          : item
+      );
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    await saveCartItem(product._id);
+    alert("Added to cart");
+  };
+
+  const buyNow = (product) => {
+    if (!localStorage.getItem("token")) {
+      localStorage.setItem("pendingBuyNow", JSON.stringify(product));
+      navigate("/login");
+      return;
+    }
+    localStorage.setItem("checkoutItems", JSON.stringify([{ ...product, qty: 1 }]));
+    navigate("/checkout");
+  };
+
   return (
-    <div className="products-container">
-      {products.map((p) => (
-        <div key={p._id} className="product-card">
-          <img src={p.image} alt={p.name} />
-          <h3>{p.name}</h3>
-          <p>₹ {p.price}</p>
-          <Link to={`/productdetails/${p._id}`}>View</Link>
+    <div className="featured-products">
+      {products.map(product => (
+        <div className="product-card" key={product._id}>
+          <img src={product.image_url || product.image} alt={product.name} />
+
+          <h3>{product.name}</h3>
+          <p>₹ {product.price}</p>
+
+          <button className="btn-buy" onClick={() => buyNow(product)}>
+            Buy Now
+          </button>
+
+          <button className="btn-cart" onClick={() => addToCart(product)}>
+            Add to Cart
+          </button>
+
+          <Link
+            to={`/productdetails/${product._id}`}
+            className="view-link"
+          >
+            View Details
+          </Link>
         </div>
       ))}
     </div>
@@ -520,3 +677,5 @@ function Products() {
 }
 
 export default Products;
+
+

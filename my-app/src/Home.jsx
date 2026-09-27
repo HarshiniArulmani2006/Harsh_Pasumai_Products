@@ -208,28 +208,481 @@
 // export default Home;
 
 
+// import { useEffect, useState } from "react";
+// import { productAPI } from "./services/api";
+// import { Link } from "react-router-dom";
+// import banner from "./assets/farm-banner.jpg";
+// import "./App.css";
+
+// function Home() {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     productAPI
+//       .getAllProducts()
+//       .then((res) => setProducts(res.data))
+//       .catch((err) => console.error(err));
+//   }, []);
+
+//   const featured = products.slice(0, 4);
+
+//   return (
+//     <div className="home-container">
+      
+//       {/* 🔹 BANNER */}
+//       <div
+//         className="home-banner"
+//         style={{ backgroundImage: `url(${banner})` }}
+//       >
+//         <h1>Welcome to Harsh's Pasumai Hub</h1>
+//       </div>
+
+//       {/* 🔹 QUOTES */}
+//       <p className="quote-main">
+//         “Bringing Nature’s Purity to Your Home.”
+//       </p>
+
+//       <p className="quote-sub">
+//         “From Farm to Home!! Freshness You Can Trust!!”
+//       </p>
+
+//       {/* 🔹 FEATURED TITLE */}
+//       <h2 className="featured-title">Featured Products</h2>
+
+//       {/* 🔹 FEATURED PRODUCTS */}
+//       <div className="featured-products">
+//         {featured.map((p) => (
+//           <div className="product-card" key={p._id}>
+//             <img src={p.image} alt={p.name} />
+//             <h3>{p.name}</h3>
+//             <p>₹ {p.price}</p>
+//             <Link to={`/productdetails/${p._id}`} className="view-btn">
+//               View
+//             </Link>
+//           </div>
+//         ))}
+//       </div>
+
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+// import { useEffect, useState } from "react";
+// import { productAPI } from "./services/api";
+// import { Link } from "react-router-dom";
+// import banner from "./assets/farm-banner.jpg";
+// import "./App.css";
+
+// function Home() {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     productAPI
+//       .getAllProducts()
+//       .then((res) => setProducts(res.data))
+//       .catch((err) => console.error(err));
+//   }, []);
+
+//   // ❌ removed slice
+//   const featured = products;
+
+//   return (
+//     <div className="home-container">
+      
+//       {/* 🔹 BANNER */}
+//       <div
+//         className="home-banner"
+//         style={{ backgroundImage: `url(${banner})` }}
+//       >
+//         <h1>Welcome to Harsh's Pasumai Hub</h1>
+//       </div>
+
+//       {/* 🔹 QUOTES */}
+//       <p className="quote-main">
+//         “Bringing Nature’s Purity to Your Home.”
+//       </p>
+
+//       <p className="quote-sub">
+//         “From Farm to Home!! Freshness You Can Trust!!”
+//       </p>
+
+//       {/* 🔹 FEATURED TITLE */}
+//       <h2 className="featured-title">Featured Products</h2>
+
+//       {/* 🔹 FEATURED PRODUCTS */}
+//       <div className="featured-products">
+//         {featured.map((p) => (
+//           <div className="product-card" key={p._id}>
+//             <img src={p.image} alt={p.name} />
+//             <h3>{p.name}</h3>
+//             <p>₹ {p.price}</p>
+//             <Link to={`/productdetails/${p._id}`} className="view-btn">
+//               View
+//             </Link>
+//           </div>
+//         ))}
+//       </div>
+
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+
+// import { useEffect, useState } from "react";
+// import { productAPI } from "./services/api";
+// import { Link } from "react-router-dom";
+// import banner from "./assets/farm-banner.jpg";
+// import "./App.css";
+
+// function Home() {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     productAPI
+//       .getAllProducts()
+//       .then((res) => setProducts(res.data || [])) // ✅ Added safety check
+//       .catch((err) => {
+//         console.error(err);
+//         setProducts([]); // ✅ Set to empty array on error
+//       });
+//   }, []);
+
+//   // ✅ Safe assignment
+//   const featured = Array.isArray(products) ? products : [];
+
+//   return (
+//     <div className="home-container">
+      
+//       {/* 🔹 BANNER */}
+//       <div
+//         className="home-banner"
+//         style={{ backgroundImage: `url(${banner})` }}
+//       >
+//         <h1>Welcome to Harsh's Pasumai Hub</h1>
+//       </div>
+
+//       {/* 🔹 QUOTES */}
+//       <p className="quote-main">
+//         “Bringing Nature’s Purity to Your Home.”
+//       </p>
+
+//       <p className="quote-sub">
+//         “From Farm to Home!! Freshness You Can Trust!!”
+//       </p>
+
+//       {/* 🔹 FEATURED TITLE */}
+//       <h2 className="featured-title">Featured Products</h2>
+
+//       {/* 🔹 FEATURED PRODUCTS - SAFE RENDERING */}
+//       <div className="featured-products">
+//         {featured.length > 0 ? (
+//           featured.map((p) => (
+//             <div className="product-card" key={p._id}>
+//               <img src={p.image} alt={p.name} />
+//               <h3>{p.name}</h3>
+//               <p>₹ {p.price}</p>
+//               <Link to={`/productdetails/${p._id}`} className="view-btn">
+//                 View
+//               </Link>
+//             </div>
+//           ))
+//         ) : (
+//           <div className="no-products-message">
+//             <p>No products available at the moment.</p>
+//           </div>
+//         )}
+//       </div>
+
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+// import { useEffect, useState } from "react";
+// import { productAPI } from "./services/api";
+// import { Link } from "react-router-dom";
+// import banner from "./assets/farm-banner.jpg";
+// import "./App.css";
+
+// function Home() {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     productAPI
+//       .getAllProducts()
+//       .then((res) => {
+//         if (Array.isArray(res.data)) {
+//           setProducts(res.data);
+//         } else {
+//           setProducts([]);
+//         }
+//       })
+//       .catch(() => setProducts([]));
+//   }, []);
+
+//   return (
+//     <div className="home-container">
+
+//       {/* BANNER */}
+//       <div
+//         className="home-banner"
+//         style={{ backgroundImage: `url(${banner})` }}
+//       >
+//         <h1>Welcome to Harsh's Pasumai Hub</h1>
+//       </div>
+
+//       {/* QUOTES */}
+//       <p className="quote-main">
+//         “Bringing Nature’s Purity to Your Home.”
+//       </p>
+
+//       <p className="quote-sub">
+//         “From Farm to Home!! Freshness You Can Trust!!”
+//       </p>
+
+//       <h2 className="featured-title">Featured Products</h2>
+
+//       <div className="featured-products">
+//         {products.length === 0 ? (
+//           <p style={{ textAlign: "center" }}>
+//             No products available at the moment.
+//           </p>
+//         ) : (
+//           products.map((p) => (
+//             <div className="product-card" key={p._id}>
+//               <img src={p.image} alt={p.name} />
+//               <h3>{p.name}</h3>
+//               <p>₹ {p.price}</p>
+//               <Link to={`/productdetails/${p._id}`} className="view-btn">
+//                 View
+//               </Link>
+//             </div>
+//           ))
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+
+{/* <div className="featured-products">
+  {products.length === 0 ? (
+    <p style={{ textAlign: "center" }}>Loading products...</p>
+  ) : (
+    products.map((p) => (
+      <div className="product-card" key={p._id}>
+        <img src={p.image} alt={p.name} />
+
+        <h3>{p.name}</h3>
+        <p>₹ {p.price}</p>
+
+        {/* BUTTONS */}
+//         <button
+//           className="btn-buy"
+//           onClick={() => alert("Buy Now clicked")}
+//         >
+//           Buy Now
+//         </button>
+
+//         <button
+//           className="btn-cart"
+//           onClick={() => addToCart(p)}
+//         >
+//           Add to Cart
+//         </button>
+//       </div>
+//     ))
+//   )}
+// </div> */}
+
+// import { useEffect, useState } from "react";
+// import { productAPI } from "./services/api";
+// import { Link } from "react-router-dom";
+// import banner from "./assets/farm-banner.jpg";
+// import "./App.css";
+
+// function Home() {
+//   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     productAPI
+//       .getAllProducts()
+//       .then((res) => setProducts(res.data || []))
+//       .catch((err) => console.error(err));
+//   }, []);
+
+//   return (
+//     <div className="home-container">
+//       <div
+//         className="home-banner"
+//         style={{ backgroundImage: `url(${banner})` }}
+//       >
+//         <h1>Welcome to Harsh's Pasumai Hub</h1>
+//       </div>
+
+//       <p className="quote-main">
+//         “Bringing Nature’s Purity to Your Home.”
+//       </p>
+
+//       <p className="quote-sub">
+//         “From Farm to Home!! Freshness You Can Trust!!”
+//       </p>
+
+//       <h2 className="featured-title">Featured Products</h2>
+
+//       <div className="featured-products">
+//         {products.length === 0 ? (
+//           <p style={{ textAlign: "center" }}>No products available</p>
+//         ) : (
+//           products.map((p) => (
+//             <div className="product-card" key={p._id}>
+//               <img src={p.image} alt={p.name} />
+//               <h3>{p.name}</h3>
+//               <p>₹ {p.price}</p>
+
+//               <Link to={`/productdetails/${p._id}`} className="view-btn">
+//                 View
+//               </Link>
+//             </div>
+//           ))
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+// import { useEffect, useState } from "react";
+// import { getProducts } from "./services/api";
+
+// import { Link, useNavigate } from "react-router-dom";
+// import banner from "./assets/farm-banner.jpg";
+// import "./App.css";
+
+// function Home() {
+//   const [products, setProducts] = useState([]);
+//   const navigate = useNavigate();
+
+//   //eEffect(() => {
+//   //   productAPI
+//   //     .getAllProducts()
+//   //     .then((res) => setProducts(res.data || []))
+//   //     .catch((err) => console.error(err));
+//   // }, []);
+//   useEffect(() => {
+//   getProducts()
+//     .then(res => setProducts(res.data))
+//     .catch(err => console.error(err));
+// }, []);
+
+
+//   const addToCart = (product) => {
+//     alert(`${product.name} added to cart`);
+//   };
+
+//   return (
+//     <div className="home-container">
+//       {/* BANNER */}
+//       <div
+//         className="home-banner"
+//         style={{ backgroundImage: `url(${banner})` }}
+//       >
+//         <h1>Welcome to Harsh's Pasumai Hub</h1>
+//       </div>
+
+//       {/* QUOTES */}
+//       <p className="quote-main">
+//         “Bringing Nature’s Purity to Your Home.”
+//       </p>
+//       <p className="quote-sub">
+//         “From Farm to Home!! Freshness You Can Trust!!”
+//       </p>
+
+//       {/* FEATURED */}
+//       <h2 className="featured-title">Featured Products</h2>
+
+//       <div className="featured-products">
+//         {products.length === 0 ? (
+//           <p style={{ textAlign: "center" }}>Loading products...</p>
+//         ) : (
+//           products.map((p) => (
+//             <div className="product-card" key={p._id}>
+//               <img src={p.image} alt={p.name} />
+
+//               <h3>{p.name}</h3>
+//               <p className="price">₹ {p.price}</p>
+
+//               <button
+//                 className="btn-buy"
+//                 onClick={() => navigate(`/productdetails/${p._id}`)}
+//               >
+//                 Buy Now
+//               </button>
+
+//               <button
+//                 className="btn-cart"
+//                 onClick={() => addToCart(p)}
+//               >
+//                 Add to Cart
+//               </button>
+
+//               <Link to={`/productdetails/${p._id}`} className="view-link">
+//                 View Details
+//               </Link>
+//             </div>
+//           ))
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+
 import { useEffect, useState } from "react";
-import { productAPI } from "./services/api";
-import { Link } from "react-router-dom";
+import { addToCart as saveCartItem, getProducts } from "./services/api";
+import { Link, useNavigate } from "react-router-dom";
 import banner from "./assets/farm-banner.jpg";
 import "./App.css";
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    productAPI
-      .getAllProducts()
+    getProducts()
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err));
   }, []);
 
-  const featured = products.slice(0, 4);
+  const addToCart = async (product) => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+      return;
+    }
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const exists = cart.find((item) => item._id === product._id);
+    cart = exists
+      ? cart.map((item) => item._id === product._id
+        ? { ...item, qty: (item.qty || item.quantity || 0) + 1 }
+        : item)
+      : [...cart, { ...product, qty: 1 }];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    await saveCartItem(product._id);
+    alert(`${product.name} added to cart`);
+  };
 
   return (
     <div className="home-container">
-      
-      {/* 🔹 BANNER */}
+      {/* BANNER */}
       <div
         className="home-banner"
         style={{ backgroundImage: `url(${banner})` }}
@@ -237,32 +690,60 @@ function Home() {
         <h1>Welcome to Harsh's Pasumai Hub</h1>
       </div>
 
-      {/* 🔹 QUOTES */}
+      {/* QUOTES */}
       <p className="quote-main">
         “Bringing Nature’s Purity to Your Home.”
       </p>
-
       <p className="quote-sub">
         “From Farm to Home!! Freshness You Can Trust!!”
       </p>
 
-      {/* 🔹 FEATURED TITLE */}
+      {/* FEATURED */}
       <h2 className="featured-title">Featured Products</h2>
 
-      {/* 🔹 FEATURED PRODUCTS */}
       <div className="featured-products">
-        {featured.map((p) => (
-          <div className="product-card" key={p._id}>
-            <img src={p.image} alt={p.name} />
-            <h3>{p.name}</h3>
-            <p>₹ {p.price}</p>
-            <Link to={`/productdetails/${p._id}`} className="view-btn">
-              View
-            </Link>
-          </div>
-        ))}
+        {products.length === 0 ? (
+          <p style={{ textAlign: "center" }}>Loading products...</p>
+        ) : (
+          products.slice(0, 4).map((p) => (
+            <div className="product-card" key={p._id}>
+              <img src={p.image_url || p.image} alt={p.name} />
+
+              <h3>{p.name}</h3>
+              <p className="price">₹ {p.price}</p>
+
+              <button
+                className="btn-buy"
+                onClick={() => navigate(`/productdetails/${p._id}`)}
+              >
+                Buy Now
+              </button>
+
+              <button
+                className="btn-cart"
+                onClick={() => addToCart(p)}
+              >
+                Add to Cart
+              </button>
+
+              <Link to={`/productdetails/${p._id}`} className="view-link">
+                View Details
+              </Link>
+            </div>
+          ))
+        )}
       </div>
 
+      {/* VIEW ALL */}
+      <div style={{ textAlign: "center", margin: "30px" }}>
+        <button
+          className="btn-buy"
+          style={{ width: "250px" }}
+          onClick={() => navigate("/products")}
+        >
+          View All Products
+        </button>
+      </div>
     </div>
   );
 }
