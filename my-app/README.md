@@ -1,212 +1,296 @@
- # Harsh's Pasumai Products
+# 🌿 Harsh's Pasumai Products
 
- Harsh's Pasumai Products is a full-stack ecommerce website for browsing and buying natural plants and products.
+**Bringing Nature's Purity to Your Home**
 
- The project includes:
+Harsh's Pasumai Products is a full-stack e-commerce platform designed to help users explore and purchase natural plants, organic products, and eco-friendly essentials. The application provides a seamless shopping experience with secure authentication, product browsing, cart management, and order processing.
 
- - React and Vite frontend
- - Node.js and Express backend
- - MongoDB database
- - User signup and login with JWT authentication
- - Product listing and product details
- - MongoDB-backed cart additions
- - Buy Now and cart checkout flows
- - MongoDB-backed order creation
- - Responsive layout for desktop and mobile screens
+---
 
- ## Project Structure
+#  Project Overview
 
- ```text
- my-app/
- |-- src/                         Frontend React application
- |-- public/                      Public frontend assets
- |-- ecom_pasumai_backend/
- |   |-- ecom-backend/            Express API and MongoDB integration
- |-- package.json                 Frontend scripts
- |-- vite.config.js
- |-- README.md
- ```
+The platform enables users to:
 
- ## Requirements
+✅ Create and manage accounts securely
 
- Install these before running the project:
+✅ Browse a variety of plants and natural products
 
- - Node.js 18 or newer
- - npm
- - MongoDB Community Server for local development, or MongoDB Atlas for deployment
- - Git
+✅ View detailed product information
 
- ## Clone the Repository
+✅ Add products to a personalized shopping cart
 
- ```powershell
- git clone https://github.com/HarshiniArulmani2006/Harsh_Pasumai_Products.git
- cd Harsh_Pasumai_Products/my-app
- ```
+✅ Place orders through a smooth checkout process
 
- ## Configure MongoDB
+✅ Access the website across desktop and mobile devices
 
- The backend reads its configuration from:
+The application follows a modern full-stack architecture using React, Node.js, Express, and MongoDB.
 
- ```text
- ecom_pasumai_backend/ecom-backend/.env
- ```
+---
 
- Create that file with the following values for local MongoDB:
+#  Tech Stack
 
- ```env
- PORT=5000
- MONGO_URL=mongodb://127.0.0.1:27017/ecom_pasumai_products
- JWT_SECRET=replace_with_a_long_random_secret
- ```
+### Frontend
 
- The `.env` file is intentionally ignored by Git. Never commit passwords, database URLs, or JWT secrets.
+* React.js
+* Vite
+* JavaScript (ES6+)
+* CSS
+* React Router
 
- For MongoDB Atlas, replace `MONGO_URL` with your Atlas connection string and make sure the database user and network access rules are configured.
+### Backend
 
- ## Install Dependencies
+* Node.js
+* Express.js
 
- Install frontend dependencies:
+### Database
 
- ```powershell
- cd my-app
- npm install
- ```
+* MongoDB
+* MongoDB Atlas (Cloud Deployment)
 
- Install backend dependencies:
+### Authentication & Security
 
- ```powershell
- cd ecom_pasumai_backend/ecom-backend
- npm install
- ```
+* JSON Web Token (JWT)
+* Password Hashing
 
- ## Run the Application Locally
+### Development Tools
 
- Open two terminal windows.
+* Git & GitHub
+* npm
+* Postman
+* VS Code
 
- ### Terminal 1: Backend
+---
 
- ```powershell
- cd my-app/ecom_pasumai_backend/ecom-backend
- npm start
- ```
+#  Key Features
 
- The backend runs on:
+### 👤 User Authentication
 
- ```text
- http://localhost:5000
- ```
+* User Registration
+* Secure Login System
+* JWT-Based Authentication
+* Protected Routes
 
- ### Terminal 2: Frontend
+### 🌱 Product Management
 
- ```powershell
- cd my-app
- npm run dev
- ```
+* View All Products
+* Product Details Page
+* Category-Based Products
+* Dynamic Product Rendering from MongoDB
 
- Open the URL printed by Vite, usually:
+### 🛒 Shopping Cart
 
- ```text
- http://localhost:5173
- ```
+* Add to Cart
+* View Cart Items
+* MongoDB Cart Storage
+* User-Specific Cart Management
 
- ## Main API Endpoints
+### 📦 Order Management
 
- | Method | Endpoint | Purpose |
- | --- | --- | --- |
- | GET | `/api/products` | Get all products |
- | GET | `/api/products/:id` | Get one product |
- | POST | `/api/auth/signup` | Create a user account |
- | POST | `/api/auth/login` | Log in and receive a JWT |
- | POST | `/api/cart` | Add a product to the logged-in user's cart |
- | GET | `/api/cart` | Get the logged-in user's cart |
- | POST | `/api/orders` | Place an authenticated order |
+* Buy Now Functionality
+* Checkout Process
+* Order Creation and Storage
+* Order Tracking Support Structure
 
- Protected endpoints require this request header:
+### 📱 Responsive Design
 
- ```text
- Authorization: Bearer YOUR_JWT_TOKEN
- ```
+* Mobile Friendly
+* Tablet Compatible
+* Desktop Optimized
 
- ## Product Data
+---
 
- Products are stored in:
+# 🏗️ System Architecture
 
- ```text
- Database: ecom_pasumai_products
- Collection: products
- ```
+```text
+Frontend (React + Vite)
+           │
+           ▼
+Backend API (Node.js + Express)
+           │
+           ▼
+MongoDB Database
+```
 
- A product should contain fields similar to:
+The frontend communicates with the backend through REST APIs, while MongoDB stores users, products, carts, and order information.
 
- ```json
- {
-	 "name": "Money Plant",
-	 "category": "Plants",
-	 "price": 129,
-	 "image_url": "https://example.com/money-plant.jpg",
-	 "description": "An attractive indoor plant that enhances greenery and decor."
- }
- ```
+---
 
- ## Useful Commands
+# 📂 Project Structure
 
- Run the frontend production build:
+```text
+my-app/
+│
+├── src/                             React Frontend
+├── public/                          Public Assets
+│
+├── ecom_pasumai_backend/
+│   └── ecom-backend/
+│       ├── routes/
+│       ├── models/
+│       ├── middleware/
+│       ├── controllers/
+│       ├── server.js
+│       └── .env
+│
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
- ```powershell
- cd my-app
- npm run build
- ```
+---
 
- Run the frontend linter:
+# 🔐 Authentication Flow
 
- ```powershell
- cd my-app
- npm run lint
- ```
+```text
+User Login
+     │
+     ▼
+Backend Verification
+     │
+     ▼
+JWT Token Generated
+     │
+     ▼
+Protected API Access
+```
 
- Run the frontend preview server after building:
+All protected APIs require:
 
- ```powershell
- cd my-app
- npm run preview
- ```
+```text
+Authorization: Bearer YOUR_JWT_TOKEN
+```
 
- ## Deployment
+---
 
- The frontend and backend must be deployed separately.
+# 🗄️ Database Collections
 
- ### Backend
+### Users
 
- Deploy `my-app/ecom_pasumai_backend/ecom-backend` to Render, Railway, or another Node.js host.
+Stores registered user information.
 
- Set these environment variables on the hosting platform:
+### Products
 
- ```env
- PORT=5000
- MONGO_URL=your_mongodb_atlas_connection_string
- JWT_SECRET=your_secure_random_secret
- ```
+Stores plant and product details.
 
- ### Frontend
+### Cart
 
- Deploy `my-app` to Vercel, Netlify, or another Vite-compatible host.
+Stores user cart items.
 
- Set this environment variable during frontend deployment:
+### Orders
 
- ```env
- VITE_API_URL=https://your-backend-domain.example.com
- ```
+Stores purchase and checkout information.
 
- The frontend uses `VITE_API_URL` to communicate with the deployed backend. A local URL such as `localhost:5000` works only on the development computer.
+---
 
- ## Important Notes
+# 📌 Sample Product Document
 
- - Start MongoDB before starting the backend when using local MongoDB.
- - Start the backend before opening product, login, cart, or checkout pages.
- - Use MongoDB Atlas when the website must work from a mobile phone over the internet.
- - Do not commit `.env` files or expose database credentials in frontend code.
- - After changing frontend environment variables, restart the Vite server and rebuild the frontend.
+```json
+{
+  "name": "Money Plant",
+  "category": "Plants",
+  "price": 129,
+  "image_url": "https://example.com/money-plant.jpg",
+  "description": "An attractive indoor plant that enhances greenery and decor."
+}
+```
 
- ## License
+---
 
- This project is for educational and personal ecommerce development.
+# ⚙️ Installation & Setup
+
+## Clone Repository
+
+```bash
+git clone https://github.com/HarshiniArulmani2006/Harsh_Pasumai_Products.git
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd my-app
+npm install
+npm run dev
+```
+
+---
+
+## Backend Setup
+
+```bash
+cd ecom_pasumai_backend/ecom-backend
+npm install
+npm start
+```
+
+---
+
+## MongoDB Configuration
+
+Create a `.env` file:
+
+```env
+PORT=5000
+MONGO_URL=mongodb://127.0.0.1:27017/ecom_pasumai_products
+JWT_SECRET=your_secure_secret_key
+```
+
+---
+
+# 🔗 API Endpoints
+
+| Method | Endpoint          | Description           |
+| ------ | ----------------- | --------------------- |
+| GET    | /api/products     | Fetch all products    |
+| GET    | /api/products/:id | Fetch product details |
+| POST   | /api/auth/signup  | Register user         |
+| POST   | /api/auth/login   | Login user            |
+| POST   | /api/cart         | Add product to cart   |
+| GET    | /api/cart         | Get user cart         |
+| POST   | /api/orders       | Create new order      |
+
+---
+
+# ☁️ Deployment
+
+### Backend Deployment
+
+* Render
+* Railway
+* Node.js Hosting Platforms
+
+### Frontend Deployment
+
+* Vercel
+* Netlify
+* Vite-Compatible Hosting
+
+### Environment Variables
+
+```env
+PORT=5000
+MONGO_URL=your_mongodb_atlas_connection_string
+JWT_SECRET=your_secure_secret
+VITE_API_URL=https://your-backend-domain.com
+```
+
+---
+
+#  Project Highlights
+
+* Full Stack MERN-Based Application
+* JWT Authentication
+* MongoDB Integration
+* REST API Architecture
+* Responsive User Interface
+* Cart & Order Management
+* Cloud Deployment Ready
+* Scalable E-commerce Design
+
+---
+
+# 🌿 Vision
+
+Harsh's Pasumai Products aims to promote sustainable living by making natural plants and eco-friendly products easily accessible through a modern digital platform.
+
+**"Bringing Nature's Purity to Your Home."**
