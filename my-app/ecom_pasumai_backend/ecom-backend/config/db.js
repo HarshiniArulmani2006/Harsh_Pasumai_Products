@@ -26,7 +26,9 @@ const connectDB = async () => {
   try {
     console.log("Connecting to local MongoDB...");
 
-    await mongoose.connect(process.env.MONGO_URL, {
+    const mongoUrl = process.env.MONGO_URL || process.env.MONGO_URI;
+
+    await mongoose.connect(mongoUrl, {
       serverSelectionTimeoutMS: 10000,
     });
 

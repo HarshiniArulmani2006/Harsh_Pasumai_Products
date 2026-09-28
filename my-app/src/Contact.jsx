@@ -24,7 +24,37 @@
 
 // export default Contact;
 
+import { useState } from "react";
+import { sendContactMessage } from "./services/api";
+
 function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState({ type: "", text: "" });
+  const [isSending, setIsSending] = useState(false);
+
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus({ type: "", text: "" });
+    setIsSending(true);
+
+    try {
+      await sendContactMessage(form);
+      setForm({ name: "", email: "", message: "" });
+      setStatus({ type: "success", text: "Your message was sent successfully." });
+    } catch (error) {
+      setStatus({
+        type: "error",
+        text: error.response?.data?.message || "Unable to send your message. Please try again.",
+      });
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <div style={{
       padding: "40px",
@@ -45,20 +75,29 @@ function Contact() {
           Contact Us
         </h2>
 
-        <label>Name</label>
-        <input type="text" placeholder="Enter your name" style={inputStyle} />
+        <form onSubmit={handleSubmit}>
+          <label>Name</label>
+          <input name="name" type="text" placeholder="Enter your name" value={form.name} onChange={handleChange} style={inputStyle} required />
 
-        <label>Email</label>
-        <input type="email" placeholder="Enter your email" style={inputStyle} />
+          <label>Email</label>
+          <input name="email" type="email" placeholder="Enter your email" value={form.email} onChange={handleChange} style={inputStyle} required />
 
-        <label>Message</label>
-        <textarea
-          placeholder="Write your message..."
-          rows="5"
-          style={{ ...inputStyle, resize: "none" }}
-        />
+          <label>Message</label>
+          <textarea
+            name="message"
+            placeholder="Write your message..."
+            rows="5"
+            value={form.message}
+            onChange={handleChange}
+            style={{ ...inputStyle, resize: "none" }}
+            required
+          />
 
-        <button style={buttonStyle}>Send Message</button>
+          <button type="submit" style={buttonStyle} disabled={isSending}>
+            {isSending ? "Sending..." : "Send Message"}
+          </button>
+          {status.text && <p style={statusStyle(status.type)}>{status.text}</p>}
+        </form>
       </div>
     </div>
   );
@@ -72,6 +111,12 @@ const inputStyle = {
   border: "1px solid #ccc",
   fontSize: "15px"
 };
+
+const statusStyle = (type) => ({
+  marginTop: "15px",
+  textAlign: "center",
+  color: type === "success" ? "#087f23" : "#b42318",
+});
 
 const buttonStyle = {
   width: "100%",

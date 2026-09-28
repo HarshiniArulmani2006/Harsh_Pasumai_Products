@@ -105,6 +105,7 @@ export const createOrder = (orderData) =>
 export const signup = (userData) => API.post("/auth/signup", userData);
 export const login = (credentials) => API.post("/auth/login", credentials);
 export const addToCart = (productId, qty = 1) => API.post("/cart", { productId, qty });
+export const sendContactMessage = (contactData) => API.post("/contact", contactData);
 
 export default API;
 

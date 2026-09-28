@@ -602,16 +602,24 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart as saveCartItem, getProducts } from "./services/api";
+import localProducts from "./productsData";
 import "./Products.css";
 
 function Products() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(localProducts);
   const navigate = useNavigate();
 
   useEffect(() => {
     getProducts()
-      .then(res => setProducts(res.data))
-      .catch(err => console.error(err));
+      .then((res) => {
+        setProducts(Array.isArray(res.data) && res.data.length > 0
+          ? res.data
+          : localProducts);
+      })
+      .catch((err) => {
+        console.error("Unable to load products from the API:", err);
+        setProducts(localProducts);
+      });
   }, []);
 
   const addToCart = async (product) => {
@@ -648,8 +656,10 @@ function Products() {
   };
 
   return (
-    <div className="featured-products">
-      {products.map(product => (
+    <div className="products-page">
+      <h2 className="featured-title">Our Products</h2>
+      <div className="featured-products">
+      {products.map((product) => (
         <div className="product-card" key={product._id}>
           <img src={product.image_url || product.image} alt={product.name} />
 
@@ -672,6 +682,7 @@ function Products() {
           </Link>
         </div>
       ))}
+      </div>
     </div>
   );
 }

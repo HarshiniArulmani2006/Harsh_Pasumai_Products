@@ -1,4 +1,58 @@
-// const products = [
+import greens from "./assets/greens.jpg";
+import honey from "./assets/honey.jpg";
+import jaggery from "./assets/jaggery.jpg";
+import millets from "./assets/millets.jpg";
+import rice from "./assets/rice.jpg";
+import turmeric from "./assets/turmeric.jpg";
+
+const products = [
+	{
+		_id: "local-greens",
+		name: "Fresh Greens Bundle",
+		price: 60,
+		image: greens,
+		description: "Organic green leafy vegetables.",
+	},
+	{
+		_id: "local-honey",
+		name: "Pure Honey",
+		price: 150,
+		image: honey,
+		description: "Raw, natural sweet honey.",
+	},
+	{
+		_id: "local-jaggery",
+		name: "Organic Jaggery",
+		price: 90,
+		image: jaggery,
+		description: "Healthy jaggery made traditionally.",
+	},
+	{
+		_id: "local-millets",
+		name: "Multi Millet Pack",
+		price: 120,
+		image: millets,
+		description: "Mixed millets for health.",
+	},
+	{
+		_id: "local-rice",
+		name: "Premium Rice",
+		price: 70,
+		image: rice,
+		description: "Freshly harvested rice.",
+	},
+	{
+		_id: "local-turmeric",
+		name: "Turmeric Powder",
+		price: 95,
+		image: turmeric,
+		description: "Pure organic turmeric powder.",
+	},
+];
+
+export default products;
+
+/* const products = [
 //   {
 //     _id: "1",
 //     name: "Organic Turmeric Powder",
@@ -205,3 +259,4 @@
 //       - name: Sync frontend to S3
 //         run: |
 //           aws s3 sync my-app/dist s3://${{ secrets.AWS_S3_BUCKET }} --delete this fot running our project with aws console
+*/

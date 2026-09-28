@@ -203,6 +203,7 @@ const authRoutes = require("./routes/authRoute");
 const productRoutes = require("./routes/productRoute");
 const cartRoutes = require("./routes/cartRoute");
 const orderRoutes = require("./routes/orderRoute");
+const contactRoutes = require("./routes/contactRoute");
 
 dotenv.config();
 connectDB();
@@ -216,6 +217,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/contact", contactRoutes);
 
 app.get("/", (req, res) => {
   res.send("API running...");
